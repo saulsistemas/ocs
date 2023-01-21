@@ -15,7 +15,11 @@ class Mbacken_lib extends CI_Model{
     return $resultado->row(); 
   }
 
-
+  public function get_combo($table){       
+    $this->db->where('status','HABILITADO');   
+    $resultado = $this->db->get($table); 
+    return $resultado->result(); 
+  }
  
 
 }

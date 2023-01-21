@@ -32,6 +32,7 @@
                         <ul class="treeview-menu">
                             <li><a href="<?php echo base_url();?>maintenance/Ccategory"><i class="fa fa-circle-o"></i> Categoria</a></li>
                             <li><a href="<?php echo base_url();?>maintenance/Cbrand"><i class="fa fa-circle-o"></i> Marca</a></li>
+                            <li><a href="<?php echo base_url();?>maintenance/Cmodel"><i class="fa fa-circle-o"></i> Modelo</a></li>
                            
                         </ul>
                     </li>
