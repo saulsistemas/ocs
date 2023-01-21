@@ -15,7 +15,7 @@ class Cmodel extends CI_Controller {
 	
 	public function index()
 	{
-      
+        $_SESSION['menus']='modelo';
         $data = array(
             'permisos' => $this->permisos,//NUEVO PARA CONTROL
 			'models' => $this->Mmodel->get_models(), 

@@ -16,24 +16,23 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                    <!--  <li class="header">MAIN NAVIGATION</li> -->
-                    <li >
+                    <li class="<?=$_SESSION['menus'] =='dashboard' ? 'active': '' ?>">
                         <a href="<?php echo base_url();?>Dashboard" >
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                         </a>
                     </li>
                     
-                    <li class="treeview">
+                    <li class="treeview <?=$_SESSION['menus'] =='categoria' || $_SESSION['menus'] =='modelo' || $_SESSION['menus'] =='marca' ? 'active': '' ?>">
                         <a href="#">
                             <i class="fa fa-cogs"></i> <span>Mantenimiento</span>
                             <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
                         </a>
-                        <ul class="treeview-menu">
-                            <li><a href="<?php echo base_url();?>maintenance/Ccategory"><i class="fa fa-circle-o"></i> Categoria</a></li>
-                            <li><a href="<?php echo base_url();?>maintenance/Cbrand"><i class="fa fa-circle-o"></i> Marca</a></li>
-                            <li><a href="<?php echo base_url();?>maintenance/Cmodel"><i class="fa fa-circle-o"></i> Modelo</a></li>
-                           
+                        <ul class="treeview-menu " >
+                            <li class="<?=$_SESSION['menus'] =='categoria' ? 'active': '' ?>"><a href="<?php echo base_url();?>maintenance/Ccategory" ><i class="fa fa-circle-o"></i> Categoria</a></li>
+                            <li class="<?=$_SESSION['menus'] =='marca' ? 'active': '' ?>"><a href="<?php echo base_url();?>maintenance/Cbrand"><i class="fa fa-circle-o"></i> Marca</a></li>
+                            <li class="<?=$_SESSION['menus'] =='modelo' ? 'active': '' ?>"><a href="<?php echo base_url();?>maintenance/Cmodel"><i class="fa fa-circle-o"></i> Modelo</a></li>
                         </ul>
                     </li>
                     

@@ -15,7 +15,7 @@ class Ccategory extends CI_Controller {
 	
 	public function index()
 	{
-      
+        $_SESSION['menus']='categoria';
         $data = array(
             'permisos' => $this->permisos,//NUEVO PARA CONTROL
 			'categories' => $this->Mcategory->get_categories(), 

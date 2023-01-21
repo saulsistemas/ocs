@@ -15,7 +15,7 @@ class Cbrand extends CI_Controller {
 	
 	public function index()
 	{
-      
+        $_SESSION['menus']='marca';
         $data = array(
             'permisos' => $this->permisos,//NUEVO PARA CONTROL
 			'brands' => $this->Mbrand->get_brands(), 

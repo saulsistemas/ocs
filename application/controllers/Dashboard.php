@@ -13,6 +13,7 @@ class Dashboard extends CI_Controller {
 	
 	public function index()
 	{
+		$_SESSION['menus']='dashboard';
 		$estado1 = $this->input->post("estado1");
 		if ($estado1) {
 			$estado =$estado1;
