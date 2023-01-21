@@ -1,5 +1,5 @@
 <?php
-class User extends CI_Model{
+class Muser extends CI_Model{
     public $tabla    =  "z_users";
     public $tabla_id =  "id";
   

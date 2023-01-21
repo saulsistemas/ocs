@@ -5,7 +5,7 @@ class Auth extends CI_Controller {
 
 	function __construct() {
         parent:: __construct();
-		$this->load->model('User'); 
+		$this->load->model('Muser'); 
     }
 	
 	public function index()
@@ -20,7 +20,7 @@ class Auth extends CI_Controller {
 
     public function login(){
 		//$res    = $this->User->login($this->input->post('txtusername'),sha1($this->input->post('txtpassword')));
-		$res    = $this->User->login($this->input->post('txtusername'),$this->input->post('txtpassword'));
+		$res    = $this->Muser->login($this->input->post('txtusername'),$this->input->post('txtpassword'));
         if (!$res) {
             $this->session->set_flashdata('error','El Usuario y/o Contraseña sonn incorrectas');
             redirect(base_url());

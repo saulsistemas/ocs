@@ -5,7 +5,9 @@ class Dashboard extends CI_Controller {
 
 	function __construct() {
         parent:: __construct();
-		//$this->load->model('Mbacken_lib'); 
+		if (!$this->session->userdata('login')) {
+			redirect(base_url());				
+		} 
     }
 	
 	public function index()

@@ -2,23 +2,20 @@
 class Mbacken_lib extends CI_Model{
 
   
-  
-  public function getTable($table){      
-    $resultado = $this->db->get($table); 
-    return $resultado->result(); 
+  public function mgetID($link){       
+    $this->db->like('link',$link);   
+    $resultado = $this->db->get('z_menus'); 
+    return $resultado->row(); 
+  }
+
+  public function getPermisos($menu,$rol){       
+    $this->db->where('menu_id',$menu);  
+    $this->db->where('rol_id',$rol);   
+    $resultado = $this->db->get('z_permissions'); 
+    return $resultado->row(); 
   }
 
 
-  public function getGraphic($campo,$estado){  
-
-    if($estado==0){
-      $query ='SELECT '.$campo.', count(HARDWARE_ID) cantidad FROM accountinfo  GROUP BY '.$campo.';';   
-    }else{
-      $query ='SELECT '.$campo.', count(HARDWARE_ID) cantidad FROM accountinfo WHERE fields_12= '.$estado.' GROUP BY '.$campo.';';        
-    }   
-    $resultado = $this->db->query($query);      
-    return $resultado->result();  
-  }
  
 
 }

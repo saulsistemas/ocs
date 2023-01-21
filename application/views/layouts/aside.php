@@ -17,14 +17,11 @@
                 <ul class="sidebar-menu" data-widget="tree">
                    <!--  <li class="header">MAIN NAVIGATION</li> -->
                     <li >
-                        <a href="<?php echo base_url();?>cdashboard" >
+                        <a href="<?php echo base_url();?>Dashboard" >
                             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                         </a>
                     </li>
-                    <li >
-                         <a href="<?php echo base_url();?>movimientos/cventarap"><i class="fa fa fa-th"></i><span> VTR </span></a>
-                        
-                    </li>
+                    
                     <li class="treeview">
                         <a href="#">
                             <i class="fa fa-cogs"></i> <span>Mantenimiento</span>
@@ -33,7 +30,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="<?php echo base_url();?>mantenimiento/cmaterial"><i class="fa fa-circle-o"></i> Tipo Material</a></li>
+                            <li><a href="<?php echo base_url();?>maintenance/Ccategory"><i class="fa fa-circle-o"></i> Categoria</a></li>
                             <li><a href="<?php echo base_url();?>mantenimiento/ccolor"><i class="fa fa-circle-o"></i> Color</a></li>
                             <li><a href="<?php echo base_url();?>mantenimiento/cmarca"><i class="fa fa-circle-o"></i> Marca</a></li>
                             <li><a href="<?php echo base_url();?>mantenimiento/ccategoria"><i class="fa fa-circle-o"></i> Categorias</a></li>

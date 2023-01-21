@@ -49,7 +49,7 @@ updated_at varchar (40)
 );
 
 INSERT INTO `ocsweb`.`z_models` (`brand_id`, `name`, `status`) VALUES ('1', 'LATITUDE 5410', 'HABILITADO');
-INSERT INTO `ocsweb`.`z_models` (`brand_id`, `name`, `status`) VALUES ('1', '	LATITUDE 3420', 'HABILITADO');
+INSERT INTO `ocsweb`.`z_models` (`brand_id`, `name`, `status`) VALUES ('1', 'LATITUDE 3420', 'HABILITADO');
 INSERT INTO `ocsweb`.`z_models` (`brand_id`, `name`, `status`) VALUES ('1', 'OPTIPLEX 3080', 'HABILITADO');
 INSERT INTO `ocsweb`.`z_models` (`brand_id`, `name`, `status`) VALUES ('1', 'XPS 13 9310', 'HABILITADO');
 INSERT INTO `ocsweb`.`z_models` (`brand_id`, `name`, `status`) VALUES ('1', 'XPS 13 9320	', 'HABILITADO');
@@ -215,9 +215,10 @@ CREATE TABLE z_roles (
 CREATE TABLE `z_menus` (
   `id` int primary key auto_increment,
   `name` varchar(50) ,
-  `link` varchar(100) ,
-  `status` int 
+  `link` varchar(100) 
 ) ;
+INSERT INTO `ocsweb`.`z_menus` (`name`, `link`) VALUES ('Inicio', 'Dashboard');
+INSERT INTO `ocsweb`.`z_menus` (`name`, `link`) VALUES ('Categoria', 'maintenance/Ccategory');
 
 CREATE TABLE `z_users` (
   `id` int primary key auto_increment,
@@ -239,4 +240,6 @@ CREATE TABLE `z_permissions` (
   `pinsert` int,
   `pupdate` int,
   `pdelete` int
-)
+);
+INSERT INTO `ocsweb`.`z_permissions` (`menu_id`, `rol_id`, `pread`, `pinsert`, `pupdate`, `pdelete`) VALUES ('1', '1', '1', '1', '1', '1');
+INSERT INTO `ocsweb`.`z_permissions` (`menu_id`, `rol_id`, `pread`, `pinsert`, `pupdate`, `pdelete`) VALUES ('2', '1', '1', '1', '1', '1');
