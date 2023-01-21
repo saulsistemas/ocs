@@ -1,11 +1,20 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+        Marcas
+        <small>Listado</small>
+        </h1>
+    </section>
     <!-- Main content -->
     <section class="content">
       <!-- Default box -->
       <div class="box">
         <div class="box-header with-border">
-          <h3 class="box-title">Listado de Marca</h3>
+              <?php if($permisos->pinsert == 1): ?>
+              <a href="<?php echo base_url();?>maintenance/Cbrand/create" class="btn btn-primary btn-flat"><span class="fa fa-plus"></span> Agregar </a>
+              <?php endif; ?>
+              
 
           <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -18,52 +27,46 @@
         <div class="flash-data" data-flashdata="<?= $this->session->flashdata('correcto');?>"></div>
         <div class="box-body">
           <div class="table-responsive">
-              <?php if($permisos->rinsert == 1): ?>
-              <a href="<?php echo base_url();?>mantenimiento/Cmarca/cadd" class="btn btn-primary btn-flat"><span class="fa fa-plus"></span> Agregar </a>
-              <?php endif; ?>
-              <br><br>
+              
               <table id="example1" class="table text-nowrap datatable table-hover">
                   <thead>
                       <tr>
                           <th>#</th>
-                          <th>Código</th>
-                          <th>Categoría</th>
-                          <th>Marca</th>                                  
+                          <th>Nombre</th> 
                           <th>Estado</th>
                           <th>Opciones</th>
                       </tr>
                   </thead>
                   <tbody>
-                      <?php if (!empty($marca)):?>
-                      <?php foreach ($marca as $atributos):?>   
+                      <?php if (!empty($brands)):?>
+                      <?php foreach ($brands as $brand):?>   
                       <tr>
-                          <td><?php echo $atributos->idmarca; ?></td>
-                          <td><?php echo $atributos->codigo; ?></td>
-                          <td><?php echo $atributos->categoria; ?></td>
-                          <td><?php echo $atributos->nombre; ?></td>                                    
+                          <td><?php echo $brand->id; ?></td>
+                          <td><?php echo $brand->name; ?></td>
+                                                              
                           <?php 
-                            if ($atributos->estado == 1) {
+                            if ($brand->status == "HABILITADO") {
                             $style='class="label label-success"';
-                            echo "<td><p><span $style><font style='vertical-align: inherit;'>Activo</font></span></p>";
+                            echo "<td><p><span $style><font style='vertical-align: inherit;'>HABILITADO</font></span></p>";
                             }else{
                             $style='class="label label-danger"';
-                            echo "<td><p><span $style><font style='vertical-align: inherit;'>Desactivo</font></span></p>";
+                            echo "<td><p><span $style><font style='vertical-align: inherit;'>DESHABILITADO</font></span></p>";
                             }                                    
                           ?> 
-                          <?php $datamarca = $atributos->idmarca."*".$atributos->codigo."*".$atributos->categoria."*".$atributos->nombre ?>
+                          <?php $datacategoria = $brand->id."*".$brand->name."*".$brand->status?>
                           <td>
                               <div class="btn-group">
-                              <button type="button" class="btn btn-info btn-view btn-flat" data-toggle="modal" data-target="#modal-default" value="<?php echo $datamarca; ?>">
+                              <button type="button" class="btn btn-info btn-view btn-flat" data-toggle="modal" data-target="#modal-default" value="<?php echo $datacategoria; ?>">
                                 <span class="fa fa-print"></span>                                       
                               </button>
                                
-                              <?php if($permisos->rupdate == 1): ?>
-                               <a href="<?php echo base_url();?>mantenimiento/Cmarca/cedit/<?php echo $atributos->idmarca; ?>" class="btn btn-warning btn-flat">
+                              <?php if($permisos->pupdate == 1): ?>
+                               <a href="<?php echo base_url();?>maintenance/Cbrand/edit/<?php echo $brand->id; ?>" class="btn btn-warning btn-flat">
                                   <span class="fa fa-pencil"></span>
                               </a>
                               <?php endif; ?>
-                              <?php if($permisos->rdelete == 1): ?>
-                               <a href="<?php echo base_url();?>mantenimiento/Cmarca/cdelete/<?php echo $atributos->idmarca; ?>" class="btn btn-danger btn-remove btn-flat">
+                              <?php if($permisos->pdelete == 1): ?>
+                               <a href="<?php echo base_url();?>maintenance/Cbrand/destroy/<?php echo $brand->id; ?>" class="btn btn-danger btn-remove btn-flat">
                                   <span class="fa fa-remove"></span>
                               </a>
                               <?php endif; ?>
@@ -78,7 +81,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-        
+          
         </div>
         <!-- /.box-footer-->
       </div>
@@ -117,9 +120,9 @@
     var data = $(this).val();                
     var info =  data.split("*");
     resp = "<p><strong><i class='fa fa-fw fa-qrcode'></i> ID: </strong>"+info[0] +"  </p>"
-    resp += "<p><strong><i class='fa fa-fw fa-tag'></i> Código: </strong>"+info[1] +"  </p>"
-    resp += "<p><strong><i class='fa fa-fw fa-tags'></i> Categoría: </strong>"+info[2] +"  </p>"
-    resp += "<p><strong><i class='fa fa-fw fa-tags'></i> Marca: </strong>"+info[3] +"  </p>"  
+    resp += "<p><strong><i class='fa fa-fw fa-tag'></i> Nombre: </strong>"+info[1] +"  </p>"
+    resp += "<p><strong><i class='fa fa-fw fa-tags'></i> Estado: </strong>"+info[2] +"  </p>"
+
     $("#modal-default .modal-body").html(resp);
     });
 

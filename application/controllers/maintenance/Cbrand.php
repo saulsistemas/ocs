@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Ccategory extends CI_Controller {
+class Cbrand extends CI_Controller {
     private $permisos;
 
 	function __construct() {
@@ -9,7 +9,7 @@ class Ccategory extends CI_Controller {
         if (!$this->session->userdata('login')) {
             redirect(base_url());               
         }
-		$this->load->model('Mcategory'); 
+		$this->load->model('Mbrand'); 
         $this->permisos = $this->backen_lib->control(); //PERSMISOS
     }
 	
@@ -18,11 +18,11 @@ class Ccategory extends CI_Controller {
       
         $data = array(
             'permisos' => $this->permisos,//NUEVO PARA CONTROL
-			'categories' => $this->Mcategory->get_categories(), 
+			'brands' => $this->Mbrand->get_brands(), 
 		);
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/category/list',$data);
+		$this->load->view('admin/brand/list',$data);
 		$this->load->view('layouts/footer');
 		
 	}
@@ -31,7 +31,7 @@ class Ccategory extends CI_Controller {
     {
         $this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/category/add');
+		$this->load->view('admin/brand/add');
 		$this->load->view('layouts/footer');
     }
 
@@ -40,20 +40,20 @@ class Ccategory extends CI_Controller {
     {
         $txtname    = $this->input->post('txtname');
         $txtstatus  = $this->input->post('txtstatus');
-        $this->form_validation->set_rules('txtname','nombre','required|is_unique[z_categories.name]');
+        $this->form_validation->set_rules('txtname','nombre','required|is_unique[z_brands.name]');
             if ($this->form_validation->run()) {
                     $data = array(
                         'name'      =>$txtname ,
                         'status'    => $txtstatus,
                         'created_at'=> date('Y-m-d H:i:s') ,
                     );    
-                $res = $this->Mcategory->store_categories($data);    
+                $res = $this->Mbrand->store_brands($data);    
                 if ($res) {
                     $this->session->set_flashdata('correcto','Se Guardo Correctamente');
-                    redirect(base_url().'maintenance/Ccategory');
+                    redirect(base_url().'maintenance/Cbrand');
                 }else{
                     $this->session->set_flashdata('error','No se pudo guardar la categoria');
-                    redirect(base_url().'maintenance/Ccategory');
+                    redirect(base_url().'maintenance/Cbrand');
                 }//FIN GUARDAR
             
             }else{
@@ -72,27 +72,27 @@ class Ccategory extends CI_Controller {
     public function edit($id)
     {
         $data = [
-            'category' => $this->Mcategory->edit_categories($id)
+            'brand' => $this->Mbrand->edit_brands($id)
         ];
         $this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
-		$this->load->view('admin/category/edit',$data);
+		$this->load->view('admin/brand/edit',$data);
 		$this->load->view('layouts/footer');
     }
 
     
     public function update()
     {
-        $txtidcategory  = $this->input->post('txtidcategory');
+        $txtidbrand  = $this->input->post('txtidbrand');
 		$txtname        = $this->input->post('txtname');
         $txtstatus      = $this->input->post('txtstatus');
 
-        $actual = $this->Mcategory->edit_categories($txtidcategory);
+        $actual = $this->Mbrand->edit_brands($txtidbrand);
 
         if ($txtname == $actual->name) {
             $unique = '';
         }else{
-            $unique = '|is_unique[z_categories.name]';
+            $unique = '|is_unique[z_brands.name]';
         }
         $this->form_validation->set_rules('txtname','nombre','required'.$unique);
 
@@ -102,28 +102,28 @@ class Ccategory extends CI_Controller {
                     'status'    => $txtstatus,
                     'updated_at'=> date('Y-m-d H:i:s') ,
                 ); 
-                $res = $this->Mcategory->update_categories($txtidcategory,$data);
+                $res = $this->Mbrand->update_brands($txtidbrand,$data);
                  if ($res) {
                     $this->session->set_flashdata('correcto','Se Guardo Correctamente');
-                	redirect(base_url().'maintenance/Ccategory');
+                	redirect(base_url().'maintenance/Cbrand');
                 }else{
                 	$this->session->set_flashdata('error','No se pudo actualizar la categoria');
-                	redirect(base_url().'maintenance/Ccategory/edit'.$txtidcategory);
+                	redirect(base_url().'maintenance/Cbrand/edit'.$txtidbrand);
                 }
             }else{
-            $this->edit($txtidcategory);
+            $this->edit($txtidbrand);
             }
     }
 
    
     public function destroy($id)
     {
-        $actual = $this->Mcategory->edit_categories($id);
+        $actual = $this->Mbrand->edit_brands($id);
         $data = array(
             'name'   =>$actual->name.date('Y-m-d H:i:s') ,
             'status' =>"0" ,
         );
-        $this->Mcategory->update_categories($id,$data);
-        echo "maintenance/Ccategory";
+        $this->Mbrand->update_brands($id,$data);
+        echo "maintenance/Cbrand";
     }
 }

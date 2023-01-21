@@ -219,6 +219,7 @@ CREATE TABLE `z_menus` (
 ) ;
 INSERT INTO `ocsweb`.`z_menus` (`name`, `link`) VALUES ('Inicio', 'Dashboard');
 INSERT INTO `ocsweb`.`z_menus` (`name`, `link`) VALUES ('Categoria', 'maintenance/Ccategory');
+INSERT INTO `ocsweb`.`z_menus` (`name`, `link`) VALUES ('Marca', 'maintenance/Cbrand');
 
 CREATE TABLE `z_users` (
   `id` int primary key auto_increment,
@@ -243,3 +244,4 @@ CREATE TABLE `z_permissions` (
 );
 INSERT INTO `ocsweb`.`z_permissions` (`menu_id`, `rol_id`, `pread`, `pinsert`, `pupdate`, `pdelete`) VALUES ('1', '1', '1', '1', '1', '1');
 INSERT INTO `ocsweb`.`z_permissions` (`menu_id`, `rol_id`, `pread`, `pinsert`, `pupdate`, `pdelete`) VALUES ('2', '1', '1', '1', '1', '1');
+INSERT INTO `ocsweb`.`z_permissions` (`menu_id`, `rol_id`, `pread`, `pinsert`, `pupdate`, `pdelete`) VALUES ('3', '1', '1', '1', '1', '1');

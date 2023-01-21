@@ -31,13 +31,8 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="<?php echo base_url();?>maintenance/Ccategory"><i class="fa fa-circle-o"></i> Categoria</a></li>
-                            <li><a href="<?php echo base_url();?>mantenimiento/ccolor"><i class="fa fa-circle-o"></i> Color</a></li>
-                            <li><a href="<?php echo base_url();?>mantenimiento/cmarca"><i class="fa fa-circle-o"></i> Marca</a></li>
-                            <li><a href="<?php echo base_url();?>mantenimiento/ccategoria"><i class="fa fa-circle-o"></i> Categorias</a></li>
-                            <li><a href="<?php echo base_url();?>mantenimiento/cfactorconve"><i class="fa fa-circle-o"></i> Factor Conversión</a></li>
-                            <li><a href="<?php echo base_url();?>mantenimiento/ccliente"><i class="fa fa-circle-o"></i> Clientes</a></li>
-                            <li><a href="<?php echo base_url();?>mantenimiento/cproveedor"><i class="fa fa-circle-o"></i> Proveedores</a></li>
-                            <li><a href="<?php echo base_url();?>mantenimiento/cproducto"><i class="fa fa-circle-o"></i> Productos</a></li>
+                            <li><a href="<?php echo base_url();?>maintenance/Cbrand"><i class="fa fa-circle-o"></i> Marca</a></li>
+                           
                         </ul>
                     </li>
                     
