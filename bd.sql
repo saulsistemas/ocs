@@ -219,7 +219,7 @@ CREATE TABLE `z_menus` (
   `status` int 
 ) ;
 
-CREATE TABLE `z_usuario` (
+CREATE TABLE `z_users` (
   `id` int primary key auto_increment,
   `code` varchar(10) ,
   `name` varchar(50) ,
@@ -229,6 +229,7 @@ CREATE TABLE `z_usuario` (
   `rol_id` int ,
   `status` int 
 ) ;
+INSERT INTO `ocsweb`.`z_users` (`code`, `name`, `last_name`, `username`, `password`, `rol_id`, `status`) VALUES ('01', 'SAUL', 'SANTAMARIA', 'saul', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', '1');
 
 CREATE TABLE `z_permissions` (
   `id` int primary key auto_increment,

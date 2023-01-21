@@ -35,7 +35,10 @@
  * @since	Version 1.0.0
  * @filesource
  */
-
+define('APP_VERSION',"1");
+define('APP_NAME',"SAUL SANTAMARIA RAMOS");
+define('PROJECT_FOLDER',"Curso01");
+define('APP_DESCRIPTION',"Sobre la vida");
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT

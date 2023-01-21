@@ -105,6 +105,10 @@ class Welcome extends CI_Controller {
         }
 
 		$data['data']= json_encode($data);
+		$this->load->view('layouts/header');
+		$this->load->view('layouts/aside');
+		//$this->load->view('admin/home');
 		$this->load->view('welcome_message',$data);
+		$this->load->view('layouts/footer');
 	}
 }
