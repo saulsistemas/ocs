@@ -74,7 +74,7 @@ INSERT INTO `ocsweb`.`z_categories` (`name`, `status`) VALUES ('IMPRESORA', 'HAB
 INSERT INTO `ocsweb`.`z_categories` (`name`, `status`) VALUES ('TABLET', 'HABILITADO');
 INSERT INTO `ocsweb`.`z_categories` (`name`, `status`) VALUES ('VIDEOCONFERENCIA', 'HABILITADO');
 
-create table z_Offices(
+create table z_offices(
 id int primary key auto_increment,
 name varchar(250),
 status varchar (16),
@@ -211,6 +211,7 @@ CREATE TABLE z_roles (
   `id` int primary key auto_increment,
   `name` varchar(50) 
 ) ;
+INSERT INTO `z_roles` (`id`, `name`) VALUES (NULL, 'Superadmin'), (NULL, 'Admin'), (NULL, 'Soporte'), (NULL, 'Lector');
 
 CREATE TABLE `z_menus` (
   `id` int primary key auto_increment,
@@ -227,7 +228,7 @@ CREATE TABLE `z_users` (
   `name` varchar(50) ,
   `last_name` varchar(100) ,
   `username` varchar(30) ,
-  `password` varchar(30) ,
+  `password` varchar(90) ,
   `rol_id` int ,
   `status` int 
 ) ;

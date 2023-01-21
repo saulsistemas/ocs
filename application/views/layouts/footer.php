@@ -280,5 +280,91 @@ $(document).ready(function () {
            
       
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+            const ctx = document.getElementById('myChart');
+            const cData = JSON.parse('<?php echo $data;?>');
+            console.log(cData);
+            
+            //if(cData.fields_5 = 2){
+            //  console.log('fdsfds');
+            //}
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                  labels: cData.campo,
+                  datasets: [{
+                    label: 'Equipos Por Planta',
+                    data: cData.cantidad,
+                    borderWidth: 1
+                  }]
+                },
+                options: {
+                  indexAxis: 'y',
+                }
+              });
+            const ctx1 = document.getElementById('myChart1');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                  labels: cData.campo1,
+                  datasets: [{
+                    label: 'Equipos Por Modelo',
+                    data: cData.cantidad1,
+                    borderWidth: 1
+                  }]
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true
+                    }
+                  }
+                }
+              });
+
+              const ctx2 = document.getElementById('myChart2');
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                  labels: cData.campo2,
+                  datasets: [{
+                    label: 'Equipos Por Tipo',
+                    data: cData.cantidad2,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)'
+                      ],
+                      borderColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)'
+                      ],
+                    borderWidth: 1
+                  }]
+                },
+                options: {
+                  scales: {
+                    y: {
+                      beginAtZero: true
+                    }
+                  }
+                }
+              });
+      
+  </script>
 </body>
 </html>
