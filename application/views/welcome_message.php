@@ -12,13 +12,13 @@
   	<nav class="navbar bg-light">
 	  <div class="container-fluid">
 	    <a class="navbar-brand" href="#">
-	      SOLGAS
+	      HELP NET
 	    </a>
 	  </div>
 	</nav>
   <div class="container-fluid">
 
-    <h1>DASHBOARD SOLGAS</h1>
+    <h1>DASHBOARD HELP NET</h1>
     <form action="<?php echo current_url();?>" method="POST">
       <select name="estado1" id="estado1" class="form-control">
         <option value="0" <?php if ($estatus == 0) echo 'selected';?>>TODOS</option>

@@ -6,7 +6,7 @@ class Welcome extends CI_Controller {
 	function __construct() {
         parent:: __construct();
         
-		$this->load->model('mbacken_lib'); 
+		$this->load->model('Mbacken_lib'); 
 		//$this->load->model('mingreso'); 
     }
 	
@@ -20,14 +20,14 @@ class Welcome extends CI_Controller {
 		}
 		$data=[];
 		$data = array(
-			'harwares' 		=> $this->mbacken_lib->getTable("hardware"),
-			'accountinfos' 	=> $this->mbacken_lib->getTable("accountinfo"),
+			'harwares' 		=> $this->Mbacken_lib->getTable("hardware"),
+			'accountinfos' 	=> $this->Mbacken_lib->getTable("accountinfo"),
 			'estatus' => $estado,
 		);
 		$campo ='fields_5';
 	
 
-		$datos= $this->mbacken_lib->getGraphic($campo,$estado);
+		$datos= $this->Mbacken_lib->getGraphic($campo,$estado);
 		
         foreach ($datos as $key=>$dato) {
 
@@ -55,7 +55,7 @@ class Welcome extends CI_Controller {
         }
 
 		$campo1 ='fields_10';
-		$datos1= $this->mbacken_lib->getGraphic($campo1,$estado);
+		$datos1= $this->Mbacken_lib->getGraphic($campo1,$estado);
 		foreach ($datos1 as $key=>$dato1) {
 			if ($campo1 =='fields_5') {
 				if ($dato1->$campo1 == 1){ $nombre1 = "SAN_BORJA";}elseif($dato1->$campo1 == 2){$nombre1 = "AREQUIPA";}elseif($dato1->$campo1 == 3){$nombre1 = "CHICLAYO";}elseif($dato1->$campo1 == 4){$nombre1 = "CUSCO";}elseif($dato1->$campo1 == 5){$nombre1 = "HUANCAYO";}elseif($dato1->$campo1 == 6){$nombre1 = "PIURA";}elseif($dato1->$campo1 == 7){$nombre1 = "PPAL";}elseif($dato1->$campo1 == 8){$nombre1 = "PUCALLPA";}elseif($dato1->$campo1 == 9){$nombre1 = "PVEN";}elseif($dato1->$campo1 == 9){$nombre1 = "TRUJILLO";}else{$nombre1 = "NO ASIGNADO";}
@@ -80,7 +80,7 @@ class Welcome extends CI_Controller {
         }
 
 		$campo2 ='fields_6';
-		$datos2= $this->mbacken_lib->getGraphic($campo2,$estado);
+		$datos2= $this->Mbacken_lib->getGraphic($campo2,$estado);
 		foreach ($datos2 as $key=>$dato2) {
 			if ($campo2 =='fields_5') {
 				if ($dato2->$campo2 == 1){ $nombre2 = "SAN_BORJA";}elseif($dato2->$campo2 == 2){$nombre2 = "AREQUIPA";}elseif($dato2->$campo2 == 3){$nombre2 = "CHICLAYO";}elseif($dato2->$campo2 == 4){$nombre2 = "CUSCO";}elseif($dato2->$campo2 == 5){$nombre2 = "HUANCAYO";}elseif($dato2->$campo2 == 6){$nombre2 = "PIURA";}elseif($dato2->$campo2 == 7){$nombre2 = "PPAL";}elseif($dato2->$campo2 == 8){$nombre2 = "PUCALLPA";}elseif($dato2->$campo2 == 9){$nombre2 = "PVEN";}elseif($dato2->$campo2 == 9){$nombre2 = "TRUJILLO";}else{$nombre2 = "NO ASIGNADO";}
