@@ -22,7 +22,7 @@
                         </a>
                     </li>
                     
-                    <li class="treeview <?=$_SESSION['menus'] =='categoria' || $_SESSION['menus'] =='modelo' || $_SESSION['menus'] =='marca' ? 'active': '' ?>">
+                    <li class="treeview <?=$_SESSION['menus'] =='categoria' || $_SESSION['menus'] =='modelo' || $_SESSION['menus'] =='producto' || $_SESSION['menus'] =='marca' ? 'active': '' ?>">
                         <a href="#">
                             <i class="fa fa-cogs"></i> <span>Mantenimiento</span>
                             <span class="pull-right-container">
@@ -33,6 +33,7 @@
                             <li class="<?=$_SESSION['menus'] =='categoria' ? 'active': '' ?>"><a href="<?php echo base_url();?>maintenance/Ccategory" ><i class="fa fa-circle-o"></i> Categoria</a></li>
                             <li class="<?=$_SESSION['menus'] =='marca' ? 'active': '' ?>"><a href="<?php echo base_url();?>maintenance/Cbrand"><i class="fa fa-circle-o"></i> Marca</a></li>
                             <li class="<?=$_SESSION['menus'] =='modelo' ? 'active': '' ?>"><a href="<?php echo base_url();?>maintenance/Cmodel"><i class="fa fa-circle-o"></i> Modelo</a></li>
+                            <li class="<?=$_SESSION['menus'] =='producto' ? 'active': '' ?>"><a href="<?php echo base_url();?>maintenance/Cproduct"><i class="fa fa-circle-o"></i> Producto</a></li>
                         </ul>
                     </li>
                     

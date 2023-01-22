@@ -8,19 +8,15 @@
     </div>
     <!-- ./wrapper -->
 <!-- jQuery 3 -->
-
-<script src="<?php echo base_url();?>assets/template/lightbox/dist/js/lightbox-plus-jquery.min.js"></script>
-<script src="<?php echo base_url();?>assets/template/highcharts/highcharts.js"></script>
-<script src="<?php echo base_url();?>assets/template/highcharts/exporting.js"></script>
 <script src="<?php echo base_url();?>assets/template/jquery-print/jquery.print.js"></script>
 <script src="<?php echo base_url();?>assets/template/alert/dist/sweetalert.min.js"></script>
 
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url();?>assets/template/bootstrap/js/bootstrap.min.js"></script>
+
 <script src="<?php echo base_url();?>assets/template/select2/bootstrap-select.min.js"></script>
-<script src="<?php echo base_url();?>assets/template/jquery-ui/jquery-ui.js"></script>
-<!-- SlimScroll -->
-<script src="<?php echo base_url();?>assets/template/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+
+
 <!-- DataTables -->
 <script src="<?php echo base_url();?>assets/template/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url();?>assets/template/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
@@ -34,12 +30,9 @@
 <script src="<?php echo base_url();?>assets/template/datatables-export/js/buttons.html5.min.js"></script>
 <script src="<?php echo base_url();?>assets/template/datatables-export/js/buttons.print.min.js"></script>
 
-<!-- FastClick -->
-<script src="<?php echo base_url();?>assets/template/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
+
 <script src="<?php echo base_url();?>assets/template/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="<?php echo base_url();?>assets/template/dist/js/demo.js"></script>
+
 <script>
 $(document).ready(function () {
     
@@ -188,7 +181,11 @@ $(document).ready(function () {
             });
         });
         
-        })
+        //$('#txtemployee_id').select2({theme: "bootstrap-5"});
+        //$('#txthardware_id').select2({theme: "bootstrap-5"});
+        //$('#txtmodel_id').select2({theme: "bootstrap-5"});
+        $('#txtmodel_id').selectpicker();
+  })
         
         
         
@@ -265,106 +262,65 @@ $(document).ready(function () {
                 return true;}
 
 
+                
+
+                //$('#txtbrand_id').on('change', function () {//CLICK EN SERVICIOS
+                //    var txtbrand_id = $(this).val();
+                //    mostrar_modelo(txtbrand_id);
+                //}) 
+                //function mostrar_modelo(txtbrand_id){
+                //    if(!txtbrand_id){ //SI SELECCIONO OTRO ITEM LA ULTMIMA CATEGORIA SE BORRA
+                //        $('#txtmodel_id').html('<option value="">Seleccione ....</option>');
+                //        return;
+                //    }//ajax
+                //    $.post("<?php echo base_url(); ?>maintenance/Cproduct/get_combo_model",{txtbrand_id : txtbrand_id},function(data){
+                //      //console.log(data.length);
+                //        //var html_select = '<option value="">Seleccione ....</option>';
+                //        for (let i = 0; i < data.length; i++) {
+                //          console.log(data[i]);
+                //           // html_select += '<option value="'+data[i].id+'">'+data[i].name+'</option>';
+                //        }
+                //        //$('#txtmodel_id').html(html_select);
+                //    })
+                //}
 
 
 
 
-
-
-
-
-
-
+            $("#txtbrand_id").change(function() {
+              
+              $("#txtbrand_id option:selected").each(function() {
+                  id = $('#txtbrand_id').val();  
+                  if(!id){ //SI SELECCIONO OTRO ITEM LA ULTMIMA CATEGORIA SE BORRA
+                      $('#txtmodel_id').html('<option value="">Seleccione ....</option>');
+                      $('#txtmodel_id').selectpicker('refresh'); 
+                      return;
+                  }      
+                                 
+                  $.post("<?php echo base_url(); ?>maintenance/Cproduct/get_combo_model", {
+                      id : id
+                  }, function(data) {
+                    datos =JSON.parse(data);
+                    var html_select = '<option value="">Seleccione ....</option>';
+                    for (let i = 0; i < datos.length; i++) {
+                       console.log(datos[i]);
+                         html_select += '<option value="'+datos[i].id+'">'+datos[i].name+'</option>';
+                     }
+                     
+                     $('#txtmodel_id').html(html_select);
+                     $('#txtmodel_id').selectpicker('refresh'); 
+                    //console.log(data);
+                      //$("#txtmodel_id").html(data);
+                      //document.getElementById("txtmodel_id").disabled =false; 
+                  });
+              });
+            });
 
 
            
       
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-
-            const ctx = document.getElementById('myChart');
-            const cData = JSON.parse('<?php echo $data;?>');
-            console.log(cData);
-            
-            //if(cData.fields_5 = 2){
-            //  console.log('fdsfds');
-            //}
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                  labels: cData.campo,
-                  datasets: [{
-                    label: 'Equipos Por Planta',
-                    data: cData.cantidad,
-                    borderWidth: 1
-                  }]
-                },
-                options: {
-                  indexAxis: 'y',
-                }
-              });
-            const ctx1 = document.getElementById('myChart1');
-            new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                  labels: cData.campo1,
-                  datasets: [{
-                    label: 'Equipos Por Modelo',
-                    data: cData.cantidad1,
-                    borderWidth: 1
-                  }]
-                },
-                options: {
-                  scales: {
-                    y: {
-                      beginAtZero: true
-                    }
-                  }
-                }
-              });
-
-              const ctx2 = document.getElementById('myChart2');
-            new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                  labels: cData.campo2,
-                  datasets: [{
-                    label: 'Equipos Por Tipo',
-                    data: cData.cantidad2,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(255, 159, 64, 0.2)',
-                        'rgba(255, 205, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(201, 203, 207, 0.2)'
-                      ],
-                      borderColor: [
-                        'rgb(255, 99, 132)',
-                        'rgb(255, 159, 64)',
-                        'rgb(255, 205, 86)',
-                        'rgb(75, 192, 192)',
-                        'rgb(54, 162, 235)',
-                        'rgb(153, 102, 255)',
-                        'rgb(201, 203, 207)'
-                      ],
-                    borderWidth: 1
-                  }]
-                },
-                options: {
-                  scales: {
-                    y: {
-                      beginAtZero: true
-                    }
-                  }
-                }
-              });
-      
-  </script>
 </body>
 </html>

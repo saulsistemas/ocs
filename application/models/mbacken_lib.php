@@ -21,6 +21,17 @@ class Mbacken_lib extends CI_Model{
     return $resultado->result(); 
   }
  
-
+  public function get_combo_hardware(){  
+    $query ='SELECT h.ID,a.TAG,h.NAME, h.USERID,h.OSNAME,
+    b.SMANUFACTURER, b.SMODEL, b.SSN, b.TYPE, h.CATEGORY_ID
+    FROM hardware h
+    INNER JOIN bios b
+    ON h.ID = b.HARDWARE_ID
+    INNER JOIN accountinfo a
+    ON h.ID = a.HARDWARE_ID
+    WHERE  h.CATEGORY_ID IS NULL;';  
+    $resultado = $this->db->query($query); 
+    return $resultado->result(); 
+  }
 }
 ?>

@@ -175,6 +175,7 @@ status varchar (16),
 created_at varchar (40),
 updated_at varchar (40)
 );
+INSERT INTO `ocsweb`.`z_employees` (`management_id`, `Office_id`, `area_id`, `code`, `name`, `job`) VALUES ('1', '1', '1', 'R900541', 'SANTAMARIA RAMOS, SAUL SANDRO', 'ASISTENTE DE INFRAESTRUCTURA');
 
 create table z_providers(
 id int primary key auto_increment,
@@ -190,8 +191,10 @@ INSERT INTO `ocsweb`.`z_providers` (`name`, `status`) VALUES ('CSI', 'HABILITADO
 
 create table z_products(
 id int primary key auto_increment,
+code varchar(100),
 brand_id int,
 model_id int,
+acquisition_id int,
 employee_id int,
 network_id int,/*OT IT*/
 provider_id int,
@@ -202,7 +205,10 @@ cod_inventory varchar (100),
 date_validation varchar(40),
 date_update varchar(40),
 date_devolution varchar(40),
-comment varchar(1000),
+referencia1 varchar(250),
+referencia2 varchar(250),
+comment varchar(1000),          
+status int,
 created_at varchar (40),
 updated_at varchar (40)
 )
@@ -222,6 +228,7 @@ INSERT INTO `ocsweb`.`z_menus` (`name`, `link`) VALUES ('Inicio', 'Dashboard');
 INSERT INTO `ocsweb`.`z_menus` (`name`, `link`) VALUES ('Categoria', 'maintenance/Ccategory');
 INSERT INTO `ocsweb`.`z_menus` (`name`, `link`) VALUES ('Marca', 'maintenance/Cbrand');
 INSERT INTO `ocsweb`.`z_menus` (`name`, `link`) VALUES ('Model', 'maintenance/Cmodel');
+INSERT INTO `ocsweb`.`z_menus` (`name`, `link`) VALUES ('Productos', 'maintenance/Cproduct');
 
 CREATE TABLE `z_users` (
   `id` int primary key auto_increment,
@@ -231,7 +238,7 @@ CREATE TABLE `z_users` (
   `username` varchar(30) ,
   `password` varchar(90) ,
   `rol_id` int ,
-  `status` int 
+  `status` varchar (16) 
 ) ;
 INSERT INTO `ocsweb`.`z_users` (`code`, `name`, `last_name`, `username`, `password`, `rol_id`, `status`) VALUES ('01', 'SAUL', 'SANTAMARIA', 'saul', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', '1', '1');
 
@@ -248,3 +255,4 @@ INSERT INTO `ocsweb`.`z_permissions` (`menu_id`, `rol_id`, `pread`, `pinsert`, `
 INSERT INTO `ocsweb`.`z_permissions` (`menu_id`, `rol_id`, `pread`, `pinsert`, `pupdate`, `pdelete`) VALUES ('2', '1', '1', '1', '1', '1');
 INSERT INTO `ocsweb`.`z_permissions` (`menu_id`, `rol_id`, `pread`, `pinsert`, `pupdate`, `pdelete`) VALUES ('3', '1', '1', '1', '1', '1');
 INSERT INTO `ocsweb`.`z_permissions` (`menu_id`, `rol_id`, `pread`, `pinsert`, `pupdate`, `pdelete`) VALUES ('4', '1', '1', '1', '1', '1');
+INSERT INTO `ocsweb`.`z_permissions` (`menu_id`, `rol_id`, `pread`, `pinsert`, `pupdate`, `pdelete`) VALUES ('5', '1', '1', '1', '1', '1');

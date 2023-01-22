@@ -9,7 +9,8 @@
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/select2/bootstrap-select.min.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/template/jquery-ui/jquery-ui.css">
+   
+    
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/Ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/alert/dist/sweetalert.css">
     <!-- DataTables -->
@@ -23,7 +24,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
     folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo base_url();?>assets/template/dist/css/skins/_all-skins.min.css">
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/template/lightbox/dist/css/lightbox.min.css">
+    
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
  <script src="<?php echo base_url();?>assets/template/jquery/jquery.min.js"></script>
   <!-- demo style -->
