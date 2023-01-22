@@ -45,7 +45,7 @@
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="employee">Usuario</label>
+                    <label for="employee">OCS Inventory</label>
                       <select name="txthardware_id" id="txthardware_id" class="form-control selectpicker" data-live-search="true" required>
                           <option value="">Seleccione ....</option>
                           <?php foreach ($hardwares as $hardware):?> 
@@ -89,24 +89,124 @@
                   </div>
                 </div>
 
-                  <div class="form-group <?php echo !empty(form_error('txtname'))? 'has-error' : '';?>">
-                      <label for="nombre">Nombre</label>
-                      <input type='text' id="txtname" name="txtname" class="form-control" value="<?php echo set_value('nombre') ?>" onblur="this.value=this.value.toUpperCase();">
-                      <?php echo form_error('txtname','<span class="help-block">','</span>') ?>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="estado">Adquisición</label>
+                      <select name="txtacquisition" id="txtacquisition" class="form-control "  required>
+                          <option value="PROPIO" >PROPIO</option>
+                          <option value="ALQUILADO" >ALQUILADO</option>
+                      </select>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="estado">Red</label>
+                      <select name="txtnetwork" id="txtnetwork" class="form-control "  required>
+                          <option value="IT" >IT</option>
+                          <option value="OT" >OT</option>
+                      </select>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="estado">Antivirus</label>
+                      <select name="txtantivirus" id="txtantivirus" class="form-control "  required>
+                          <option value="SI" >SI</option>
+                          <option value="NO" >NO</option>
+                          <option value="NO_APLICA" >NO_APLICA</option>
+                      </select>
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+
+                  <div class="form-group">
+                    <label for="provider">Proveedor</label>
+                      <select name="txtprovider_id" id="txtprovider_id" class="form-control selectpicker" data-live-search="true" required>
+                          <option value="">Seleccione ....</option>
+                          <?php foreach ($providers as $provider):?> 
+                              <option value="<?php echo $provider->id; ?>"><?php echo $provider->name; ?></option>
+                           <?php endforeach ?>
+                      </select>
                   </div>
 
                   <div class="form-group">
-                        <label for="estado">Estado</label>
-                        <select name="txtstatus" id="txtstatus" class="form-control "  required>
-                           <option value="HABILITADO" >HABILITADO</option>
-                           <option value="DESHABILITADO" >DESHABILITADO</option>
-                       </select>
+                    <label for="status_assignment">Estado </label>
+                      <select name="txtstatus_assignment_id" id="txtstatus_assignment_id" class="form-control selectpicker" data-live-search="true" required>
+                          <option value="">Seleccione ....</option>
+                          <?php foreach ($status_assignments as $status_assignment):?> 
+                              <option value="<?php echo $status_assignment->id; ?>"><?php echo $status_assignment->name; ?></option>
+                           <?php endforeach ?>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="status_hardware">Estado Equipo</label>
+                      <select name="txtstatus_hardware_id" id="txtstatus_hardware_id" class="form-control selectpicker" data-live-search="true" required>
+                          <option value="">Seleccione ....</option>
+                          <?php foreach ($status_hardwares as $status_hardware):?> 
+                              <option value="<?php echo $status_hardware->id; ?>"><?php echo $status_hardware->name; ?></option>
+                           <?php endforeach ?>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="txtdate_validation">Fecha Asignación</label>
+                    <input type="date" name="txtdate_validation" id="txtdate_validation" class="form-control" value="<?php echo date("Y-m-d");?>" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="txtcod_inventory">Código de Inventario</label>
+                    <input type="text" name="txtcod_inventory" id="txtcod_inventory" class="form-control" >
+                  </div>
+
+                </div>
+                
+                <div class="col-md-6">
+
+                  <div class="form-group">
+                    <label for="txtdate_update">Fecha Actualización</label>
+                    <input type="date" name="txtdate_update" id="txtdate_update" class="form-control">
                   </div> 
 
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">Guardar </button>
-                    <a href="<?php echo base_url();?>maintenance/Cproduct/" class="btn btn-default pull-right "><span class="fa fa-minus-circle"></span> Cancelar</a>
+                  <div class="form-group">
+                    <label for="txtdate_devolution">Fecha Devolución</label>
+                    <input type="date" name="txtdate_devolution" id="txtdate_devolution" class="form-control">
+                  </div> 
+
+                  <div class="form-group">
+                    <label for="txtreferencia1">Referencia 1</label>
+                    <input type="text" name="txtreferencia1" id="txtreferencia1" class="form-control" >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="txtreferencia2">Referencia 2</label>
+                    <input type="text" name="txtreferencia2" id="txtreferencia2" class="form-control" >
+                  </div>
+
+                  <div class="form-group">
+                    <label for="txtreferencia3">Referencia 3</label>
+                    <input type="text" name="txtreferencia3" id="txtreferencia3" class="form-control" >
+                  </div>
+
+                </div> 
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="txtcomment">Observaciones</label>
+                    <textarea  name="txtcomment" id="txtcomment" rows="2"  class="form-control" ></textarea>
+                  </div>
                 </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                      <button type="submit" class="btn btn-success">Guardar </button>
+                      <a href="<?php echo base_url();?>maintenance/Cproduct/" class="btn btn-default pull-right "><span class="fa fa-minus-circle"></span> Cancelar</a>
+                  </div>
+                </div> 
+
+                
               </form>
             
           </div>

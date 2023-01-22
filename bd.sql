@@ -116,18 +116,18 @@ INSERT INTO `ocsweb`.`z_status_assignments` (`name`, `status`) VALUES ('EN ALMAC
 INSERT INTO `ocsweb`.`z_status_assignments` (`name`, `status`) VALUES ('PRESTAMO', 'HABILITADO');
 INSERT INTO `ocsweb`.`z_status_assignments` (`name`, `status`) VALUES ('ROBADO', 'HABILITADO');
 
-create table z_status_hardware(
+create table z_status_hardwares(
 id int primary key auto_increment,
 name varchar(250),
 status varchar (16),
 created_at varchar (40),
 updated_at varchar (40)
 );
-INSERT INTO `ocsweb`.`z_status_hardware` (`name`, `status`) VALUES ('OPERATIVO', 'HABILITADO');
-INSERT INTO `ocsweb`.`z_status_hardware` (`name`, `status`) VALUES ('NUEVO', 'HABILITADO');
-INSERT INTO `ocsweb`.`z_status_hardware` (`name`, `status`) VALUES ('EN GARANTIA', 'HABILITADO');
-INSERT INTO `ocsweb`.`z_status_hardware` (`name`, `status`) VALUES ('INOPERATIVO', 'HABILITADO');
-INSERT INTO `ocsweb`.`z_status_hardware` (`name`, `status`) VALUES ('ROBADO', 'HABILITADO');
+INSERT INTO `ocsweb`.`z_status_hardwares` (`name`, `status`) VALUES ('OPERATIVO', 'HABILITADO');
+INSERT INTO `ocsweb`.`z_status_hardwares` (`name`, `status`) VALUES ('NUEVO', 'HABILITADO');
+INSERT INTO `ocsweb`.`z_status_hardwares` (`name`, `status`) VALUES ('EN GARANTIA', 'HABILITADO');
+INSERT INTO `ocsweb`.`z_status_hardwares` (`name`, `status`) VALUES ('INOPERATIVO', 'HABILITADO');
+INSERT INTO `ocsweb`.`z_status_hardwares` (`name`, `status`) VALUES ('ROBADO', 'HABILITADO');
 
 create table z_networks(
 id int primary key auto_increment,
@@ -191,24 +191,33 @@ INSERT INTO `ocsweb`.`z_providers` (`name`, `status`) VALUES ('CSI', 'HABILITADO
 
 create table z_products(
 id int primary key auto_increment,
+employee_id int,
+category_id int ,
 code varchar(100),
+hardware_id int ,/*OCS*/
 brand_id int,
 model_id int,
-acquisition_id int,
-employee_id int,
-network_id int,/*OT IT*/
+acquisition varchar(50),/*PROPIO ALQUILADO*/
+network varchar(15),/*OT IT*/
+antivirus varchar(15),/*SI NO NO_APLICA*/
+
 provider_id int,
 status_assignment_id int, /*ESTADO ASIGNADO*/
 status_hardware_id int, /*ESTADO EQUIPO*/
-hardware_id int ,/*OCS*/
+ocs_local int,
 cod_inventory varchar (100),
 date_validation varchar(40),
 date_update varchar(40),
 date_devolution varchar(40),
 referencia1 varchar(250),
-referencia2 varchar(250),
-comment varchar(1000),          
-status int,
+referencia2 varchar(250),                  
+referencia3 varchar(250),   
+comment varchar(1000), 
+system_operative varchar(100), 
+processor varchar(100),        
+status varchar (16),
+user_created int,
+user_update int,
 created_at varchar (40),
 updated_at varchar (40)
 )

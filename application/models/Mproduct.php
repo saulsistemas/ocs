@@ -38,5 +38,71 @@ class Mproduct extends CI_Model{
       return $resultado->result(); 
     }
     
+    public function update_hardware($id,$data){       
+      $this->db->where('id',$id);  
+      return  $this->db->update('hardware',$data);    	
+   }
+
+
+   
+    var $order_column = array(null, "prioridad", "codigo", null, null); 
+     
+    function selectquery($idempresa){  
+          $this->db->select('ti.*,sol.codigo codsolicitante ,CONCAT(sol.nombre," ",sol.apellido) solicitante , tps.codigo codsoporte,tps.nombre soporte,res.codigo codresponsable,CONCAT(res.nombre," ",res.apellido )responsable ');   
+          $this->db->from('ticket ti');  
+
+          $this->db->join('usuario sol','ti.idsolicitante=sol.idusuario'); 
+          $this->db->join('tiposop tps','ti.idtiposop = tps.idtiposop'); 
+          $this->db->join('usuario res','ti.idresponsable = res.idusuario','left'); 
+
+         
+          $this->db->where('ti.estado <=','3');
+          $this->db->where('ti.idempresa',$idempresa);
+
+         if(isset($_POST["search"]["value"]))  
+         {  
+              $this->db->like("ti.prioridad", $_POST["search"]["value"]);  
+              $this->db->or_like("ti.codigo", $_POST["search"]["value"]);  
+
+         }  
+         if(isset($_POST["order"]))  
+         {  
+              $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);  
+         }  
+         else  
+         {  
+              $this->db->order_by('ti.idticket', 'DESC');  
+         }  
+    }  
+    function selectdatatable($idempresa){  
+         $this->selectquery($idempresa);  
+         if($_POST["length"] != -1){  
+          $this->db->limit($_POST['length'], $_POST['start']);  
+         } 
+        $this->db->where('ti.estado <=','3');
+        $this->db->where('ti.idempresa',$idempresa);
+         $query = $this->db->get();  
+         return $query->result();  
+    }  
+    function get_filtered_data($idempresa){  
+         $this->selectquery($idempresa); 
+         $this->db->where('ti.estado <=','3');
+         $this->db->where('ti.idempresa',$idempresa); 
+         $query = $this->db->get();  
+         return $query->num_rows();  
+    }       
+    function get_all_data($idempresa) {  
+        $this->db->select('ti.*,sol.codigo codsolicitante ,CONCAT(sol.nombre," ",sol.apellido) solicitante , tps.codigo codsoporte,tps.nombre soporte,res.codigo codresponsable,CONCAT(res.nombre," ",res.apellido )responsable ');   
+        $this->db->from('ticket ti');  
+
+        $this->db->join('usuario sol','ti.idsolicitante=sol.idusuario'); 
+        $this->db->join('tiposop tps','ti.idtiposop = tps.idtiposop'); 
+        $this->db->join('usuario res','ti.idresponsable = res.idusuario','left'); 
+
+         
+        $this->db->where('ti.estado <=','3');
+        $this->db->where('ti.idempresa',$idempresa);
+     return $this->db->count_all_results();  
+    } 
 }
 ?>

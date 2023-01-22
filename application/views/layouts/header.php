@@ -115,11 +115,11 @@
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
-            <a href="<?php echo base_url();?>cdashboard" class="logo">
+            <a href="<?php echo base_url();?>Dashboard" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>S</b>V</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>SISVEN</b></span>
+                <span class="logo-lg"><b>SOLGAS</b></span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">

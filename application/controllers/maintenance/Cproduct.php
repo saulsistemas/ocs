@@ -30,10 +30,13 @@ class Cproduct extends CI_Controller {
     public function create()
     {
         $data = array(
-            'employees'     => $this->Mbacken_lib->get_combo('z_employees'),
-            'categories'    => $this->Mbacken_lib->get_combo('z_categories'),
-            'brands'        => $this->Mbacken_lib->get_combo('z_brands'),
-            'hardwares'     => $this->Mbacken_lib->get_combo_hardware(),
+            'employees'             => $this->Mbacken_lib->get_combo('z_employees'),
+            'categories'            => $this->Mbacken_lib->get_combo('z_categories'),
+            'brands'                => $this->Mbacken_lib->get_combo('z_brands'),
+            'hardwares'             => $this->Mbacken_lib->get_combo_hardware(),
+            'providers'             => $this->Mbacken_lib->get_combo('z_providers'),
+            'status_assignments'    => $this->Mbacken_lib->get_combo('z_status_assignments'),
+            'status_hardwares'      => $this->Mbacken_lib->get_combo('z_status_hardwares'),
         );
         $this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
@@ -44,29 +47,63 @@ class Cproduct extends CI_Controller {
    
     public function store()
     {
-        $txtname    = $this->input->post('txtname');
-        $txtbrand_id= $this->input->post('txtbrand_id');
-        $txtstatus  = $this->input->post('txtstatus');
-        $this->form_validation->set_rules('txtname','nombre','required|is_unique[z_products.name]');
-            if ($this->form_validation->run()) {
-                    $data = array(
-                        'name'      =>$txtname ,
-                        'brand_id'  =>$txtbrand_id ,
-                        'status'    => $txtstatus,
-                        'created_at'=> date('Y-m-d H:i:s') ,
-                    );    
-                $res = $this->Mproduct->store_products($data);    
-                if ($res) {
-                    $this->session->set_flashdata('correcto','Se Guardo Correctamente');
-                    redirect(base_url().'maintenance/Cproduct');
-                }else{
-                    $this->session->set_flashdata('error','No se pudo guardar la categoria');
-                    redirect(base_url().'maintenance/Cproduct');
-                }//FIN GUARDAR
-            
+        $txtemployee_id         =$this->input->post('txtemployee_id'); 
+        $txthardware_id         =$this->input->post('txthardware_id'); 
+        $txtcategory_id         =$this->input->post('txtcategory_id'); 
+        $txtbrand_id            =$this->input->post('txtbrand_id'); 
+        $txtmodel_id            =$this->input->post('txtmodel_id'); 
+        $txtacquisition         =$this->input->post('txtacquisition'); 
+        $txtnetwork             =$this->input->post('txtnetwork'); 
+        $txtantivirus           =$this->input->post('txtantivirus'); 
+        $txtprovider_id         =$this->input->post('txtprovider_id'); 
+        $txtstatus_assignment_id=$this->input->post('txtstatus_assignment_id'); 
+        $txtstatus_hardware_id  =$this->input->post('txtstatus_hardware_id'); 
+        $txtdate_validation     =$this->input->post('txtdate_validation'); 
+        $txtcod_inventory       =$this->input->post('txtcod_inventory'); 
+        $txtdate_update         =$this->input->post('txtdate_update'); 
+        $txtdate_devolution     =$this->input->post('txtdate_devolution'); 
+        $txtreferencia1         =$this->input->post('txtreferencia1'); 
+        $txtreferencia2         =$this->input->post('txtreferencia2'); 
+        $txtreferencia3         =$this->input->post('txtreferencia3'); 
+        $txtcomment             =$this->input->post('txtcomment');
+
+            $data = array(
+                'employee_id'           =>$txtemployee_id,
+                'hardware_id'           =>$txthardware_id,
+                'category_id'           =>$txtcategory_id,
+                'brand_id'              =>$txtbrand_id,
+                'model_id'              =>$txtmodel_id,
+                'acquisition'           =>$txtacquisition,
+                'network'               =>$txtnetwork,
+                'antivirus'             =>$txtantivirus,
+                'provider_id'           =>$txtprovider_id,
+                'status_assignment_id'  =>$txtstatus_assignment_id,
+                'status_hardware_id'    =>$txtstatus_hardware_id,
+                'date_validation'       =>$txtdate_validation,
+                'cod_inventory'         =>$txtcod_inventory,
+                'date_update'           =>$txtdate_update,
+                'date_devolution'       =>$txtdate_devolution,
+                'referencia1'           =>$txtreferencia1,
+                'referencia2'           =>$txtreferencia2,
+                'referencia3'           =>$txtreferencia3,
+                'comment'               =>$txtcomment,
+                'ocs_local'             =>0,
+                'status'                =>'HABILITADO',
+                'user_created'          =>$this->session->userdata('idusuario'),
+                'created_at'            =>date('Y-m-d H:i:s') ,
+            );    
+
+            $res = $this->Mproduct->store_products($data); 
+            $hard = $this->Mproduct->update_hardware($txthardware_id,array('CATEGORY_ID' =>1));  
+            if ($res) {
+                $this->session->set_flashdata('correcto','Se Guardo Correctamente');
+                redirect(base_url().'maintenance/Cproduct');
             }else{
-                $this->create();
-            }
+                $this->session->set_flashdata('error','No se pudo guardar la categoria');
+                redirect(base_url().'maintenance/Cproduct');
+            }//FIN GUARDAR
+            
+            
 
     }
 
