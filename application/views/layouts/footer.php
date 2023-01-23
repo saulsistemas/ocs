@@ -36,45 +36,107 @@
 <script>
 $(document).ready(function () {
     
-        //MENU ACTIVO
-        var url = window.location.href;
-         // for sidebar menu entirely but not cover treeview
-         $('ul.sidebar-menu a').filter(function() {
-         return this.href == url;
-         }).parent().addClass('active');
-         // for treeview
-         $('ul.treeview-menu a').filter(function() {
-         return this.href == url;
-         }).closest('.treeview').addClass('active');
-
-
-
-            var base_url= "<?php echo base_url();?>";
-
+    var base_url= "<?php echo base_url();?>";
               
-        
-          
-        $('#example').DataTable( {
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'excelHtml5',
-                    title: "Listado de Ventas",
-                    exportOptions: {
-                        columns: [ 0, 1,2, 3, 4, 5 ]
-                    }
-                },
-                {
-                    extend: 'pdfHtml5',
-                    title: "Listado de Ventas",
-                    exportOptions: {
-                        columns: [ 0, 1,2, 3, 4, 5 ]
-                    }
-                    
+    var dataTable = $('#user_data').DataTable({  
+       "processing":true,  
+       "serverSide":true,  
+       "order":[],  
+       "ajax":{  
+            url:"<?php echo base_url() . 'maintenance/Cproduct/fetch_user'; ?>",  
+            type:"POST"  
+       },  
+        dom: 'lBfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                title: "Listado de Equipos",
+                exportOptions: {
+                    columns: [ 0, 1,2, 3, 4, 5,6,7,8,9,10,11,12,13 ]
                 }
-            ],
+            },
+        ],
+       "columnDefs":[  
+            {  
+                 //"targets":[0, 3, 4],  
+                 "orderable":false,  
+            },  
+       ],
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                "zeroRecords": "No se encontraron resultados en su busqueda",
+                "searchPlaceholder": "Buscar registros",
+                "info": "Mostrando registros de _START_ al _END_ de un total de  _TOTAL_ registros",
+                "infoEmpty": "No existen registros",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
+                },
+            }  
+    });
+         
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                title: "Listado de Ventas",
+                exportOptions: {
+                    columns: [ 0, 1,2, 3, 4, 5 ]
+                }
+            },
+            {
+                extend: 'pdfHtml5',
+                title: "Listado de Ventas",
+                exportOptions: {
+                    columns: [ 0, 1,2, 3, 4, 5 ]
+                }
+            }
+        ],
+        language: {
+            "lengthMenu": "Mostrar _MENU_ registros por pagina",
+            "zeroRecords": "No se encontraron resultados en su busqueda",
+            "searchPlaceholder": "Buscar registros",
+            "info": "Mostrando registros de _START_ al _END_ de un total de  _TOTAL_ registros",
+            "infoEmpty": "No existen registros",
+            "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "search": "Buscar:",
+            "paginate": {
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente",
+                "previous": "Anterior"
+            },
+        }
+    });
 
-            language: {
+    $('#example1').DataTable({
+        dom: 'Blfrtip',
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                title: "Listado de Categorias",
+                exportOptions: {
+                    columns: [ 0, 1,2]
+                }
+            },
+            //{
+            //    extend: 'pdfHtml5',
+            //    title: "Listado de Categorias",
+            //    exportOptions: {
+            //        columns: [ 0, 1,2]
+            //    }
+            //}
+        ],
+        order: [
+            [0, 'desc']
+        ],
+            "language": {
                 "lengthMenu": "Mostrar _MENU_ registros por pagina",
                 "zeroRecords": "No se encontraron resultados en su busqueda",
                 "searchPlaceholder": "Buscar registros",
@@ -89,87 +151,26 @@ $(document).ready(function () {
                     "previous": "Anterior"
                 },
             }
-        });
-
+    });
         
-        
-        $('#example1').DataTable({
-            
-            dom: 'Blfrtip',
-            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            buttons: [
-                {
-                    extend: 'excelHtml5',
-                    title: "Listado de Categorias",
-                    exportOptions: {
-                        columns: [ 0, 1,2]
-                    }
+    $('#example2').DataTable({
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por pagina",
+                "zeroRecords": "No se encontraron resultados en su busqueda",
+                "searchPlaceholder": "Buscar registros",
+                "info": "Mostrando registros de _START_ al _END_ de un total de  _TOTAL_ registros",
+                "infoEmpty": "No existen registros",
+                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primero",
+                    "last": "Último",
+                    "next": "Siguiente",
+                    "previous": "Anterior"
                 },
-                {
-                    extend: 'pdfHtml5',
-                    title: "Listado de Categorias",
-                    exportOptions: {
-                        columns: [ 0, 1,2]
-                    }
-                }
-            ],
-            order: [
-                [0, 'desc']
-            ],
-                "language": {
-                    "lengthMenu": "Mostrar _MENU_ registros por pagina",
-                    "zeroRecords": "No se encontraron resultados en su busqueda",
-                    "searchPlaceholder": "Buscar registros",
-                    "info": "Mostrando registros de _START_ al _END_ de un total de  _TOTAL_ registros",
-                    "infoEmpty": "No existen registros",
-                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    "search": "Buscar:",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Último",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    },
-                }
-            });
-        
-        $('#example2').DataTable({
-                "language": {
-                    "lengthMenu": "Mostrar _MENU_ registros por pagina",
-                    "zeroRecords": "No se encontraron resultados en su busqueda",
-                    "searchPlaceholder": "Buscar registros",
-                    "info": "Mostrando registros de _START_ al _END_ de un total de  _TOTAL_ registros",
-                    "infoEmpty": "No existen registros",
-                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    "search": "Buscar:",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Último",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    },
-                }
-            });
-        
-        $('#example3').DataTable({
-                "language": {
-                    "lengthMenu": "Mostrar _MENU_ registros por pagina",
-                    "zeroRecords": "No se encontraron resultados en su busqueda",
-                    "searchPlaceholder": "Buscar registros",
-                    "info": "Mostrando registros de _START_ al _END_ de un total de  _TOTAL_ registros",
-                    "infoEmpty": "No existen registros",
-                    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-                    "search": "Buscar:",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Último",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    },
-                }
-            });
-        $('.sidebar-menu').tree();
-        
+            }
+    });
+    //------------------FIN DE TABLET-------------------------------------------------------------
         $(document).on("click",".btn-print",function(){
             $("#modal-default .modal-body").print({
                 title:"COMPROBANTE VENTA"
@@ -185,16 +186,11 @@ $(document).ready(function () {
         //$('#txthardware_id').select2({theme: "bootstrap-5"});
         //$('#txtmodel_id').select2({theme: "bootstrap-5"});
         $('#txtmodel_id').selectpicker();
+
+
   })
         
-        
-        
 
-        
-
-
-        
-       
 
         //MENSAJE DE CONFIRMACION
         const flashdata = $('.flash-data').data('flashdata');
@@ -306,12 +302,8 @@ $(document).ready(function () {
                        console.log(datos[i]);
                          html_select += '<option value="'+datos[i].id+'">'+datos[i].name+'</option>';
                      }
-                     
                      $('#txtmodel_id').html(html_select);
                      $('#txtmodel_id').selectpicker('refresh'); 
-                    //console.log(data);
-                      //$("#txtmodel_id").html(data);
-                      //document.getElementById("txtmodel_id").disabled =false; 
                   });
               });
             });

@@ -27,58 +27,26 @@
         <div class="flash-data" data-flashdata="<?= $this->session->flashdata('correcto');?>"></div>
         <div class="box-body">
           <div class="table-responsive">
-              
-              <table id="example1" class="table text-nowrap datatable table-hover">
+              <table id="user_data" class="table text-nowrap datatable table-hover">
                   <thead>
                       <tr>
                           <th>#</th>
-                          <th>Marca</th> 
-                          <th>Modelo</th> 
-                          <th>Serie</th>
-                          <th>Serie</th>
+                          <th>Código</th>
+                          <th>Usuario</th>
+                          <th>Categoría</th>
+                          <th>Marca</th>
+                          <th>Modelo</th>   
+                          <th>Serial</th>   
+                          <th>SO</th>                                
+                          <th>Procesador</th>
+                          <th>Memoria</th>
+                          <th>Hostname</th>
+                          <th>Proveedor</th>
+                          <th>Estado</th>
+                          <th>Estado Equipo</th>
                           <th>Opciones</th>
                       </tr>
                   </thead>
-                  <tbody>
-                      <?php if (!empty($products)):?>
-                      <?php foreach ($products as $product):?>   
-                      <tr>
-                          <td><?php echo $product->id; ?></td>
-                          <td><?php echo $product->brand; ?></td>
-                          <td><?php echo $product->name; ?></td>
-                                                              
-                          <?php 
-                            if ($product->status == 1) {
-                            $style='class="label label-success"';
-                            echo "<td><p><span $style><font style='vertical-align: inherit;'>HABILITADO</font></span></p>";
-                            }else{
-                            $style='class="label label-danger"';
-                            echo "<td><p><span $style><font style='vertical-align: inherit;'>DESHABILITADO</font></span></p>";
-                            }                                    
-                          ?> 
-                          <?php $datacategoria = $product->id."*".$product->name."*".$product->status?>
-                          <td>
-                              <div class="btn-group">
-                              <button type="button" class="btn btn-info btn-view btn-flat" data-toggle="modal" data-target="#modal-default" value="<?php echo $datacategoria; ?>">
-                                <span class="fa fa-print"></span>                                       
-                              </button>
-                               
-                              <?php if($permisos->pupdate == 1): ?>
-                               <a href="<?php echo base_url();?>maintenance/Cproduct/edit/<?php echo $product->id; ?>" class="btn btn-warning btn-flat">
-                                  <span class="fa fa-pencil"></span>
-                              </a>
-                              <?php endif; ?>
-                              <?php if($permisos->pdelete == 1): ?>
-                               <a href="<?php echo base_url();?>maintenance/Cproduct/destroy/<?php echo $product->id; ?>" class="btn btn-danger btn-remove btn-flat">
-                                  <span class="fa fa-remove"></span>
-                              </a>
-                              <?php endif; ?>
-                              </div>
-                          </td>
-                      </tr> 
-                  <?php endforeach ?>
-                  <?php endif; ?>
-                  </tbody>
               </table>
           </div>
         </div>
@@ -133,6 +101,8 @@
     $("#modal-default .modal-body").print({
         title:"-"
     });
-});
+    });
+
+
 
 </script>

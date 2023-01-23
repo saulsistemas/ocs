@@ -45,63 +45,103 @@ class Mproduct extends CI_Model{
 
 
    
-    var $order_column = array(null, "prioridad", "codigo", null, null); 
+    var $order_column = array("p.id", "codigo_empleado", "empleado", "categoria", "marca", "modelo","serial", "hard.OSNAME", "hard.PROCESSORT","hard.MEMORY","host_name","proveedor","estado1","estado2"); 
+    var $column_search  = array("p.id", "e.code", "e.name", "c.name","mar.name","mo.name","bi.SSN","hard.OSNAME", "hard.PROCESSORT","hard.MEMORY","hard.NAME","pro.name","stasig.name","sthard.name"); 
      
-    function selectquery($idempresa){  
-          $this->db->select('ti.*,sol.codigo codsolicitante ,CONCAT(sol.nombre," ",sol.apellido) solicitante , tps.codigo codsoporte,tps.nombre soporte,res.codigo codresponsable,CONCAT(res.nombre," ",res.apellido )responsable ');   
-          $this->db->from('ticket ti');  
+    function selectquery(){  
+          $query='p.*,
+          e.code as codigo_empleado,e.name as empleado, 
+          c.name categoria,
+          mar.name marca,
+          mo.name modelo,
+          pro.name proveedor,
+          hard.OSNAME,hard.PROCESSORT,hard.MEMORY,hard.NAME as host_name,
+          stasig.name as estado1,
+          sthard.name as estado2,
+          bi.SSN as serial, bi.SMANUFACTURER,bi.SMODEL,bi.TYPE';
+          $this->db->select($query);   
+          $this->db->from('z_products p');  
+          $this->db->join('z_employees e','p.employee_id = e.id'); 
+          $this->db->join('z_categories c','p.category_id = c.id'); 
+          $this->db->join('z_brands mar','p.brand_id = mar.id'); 
+          $this->db->join('z_models mo','p.model_id = mo.id'); 
+          $this->db->join('hardware hard','p.hardware_id = hard.ID'); 
+          $this->db->join('z_providers pro','p.provider_id = pro.id'); 
+          $this->db->join('z_status_assignments stasig','p.status_assignment_id = stasig.id'); 
+          $this->db->join('z_status_hardwares sthard','p.status_hardware_id = sthard.id'); 
+          $this->db->join('bios bi','hard.ID = bi.HARDWARE_ID'); 
 
-          $this->db->join('usuario sol','ti.idsolicitante=sol.idusuario'); 
-          $this->db->join('tiposop tps','ti.idtiposop = tps.idtiposop'); 
-          $this->db->join('usuario res','ti.idresponsable = res.idusuario','left'); 
 
-         
-          $this->db->where('ti.estado <=','3');
-          $this->db->where('ti.idempresa',$idempresa);
+          $i = 0;
+         foreach ($this->column_search  as $item) // loop column 
+         {
+             if($_POST["search"]["value"]) // if datatable send POST for search
+             {
+                 if($i===0) // first loop
+                 {
+                     $this->db->group_start(); // open bracket. query Where with OR clause better with bracket. because maybe can combine with other WHERE with AND.
+                     $this->db->like($item, $_POST["search"]["value"]);
+                 }
+                 else
+                 {
+                     $this->db->or_like($item, $_POST["search"]["value"]);
+                 }
+                 if(count($this->column_search ) - 1 == $i) //last loop
+                     $this->db->group_end(); //close bracket
+             }
+             $i++;
+         }
 
-         if(isset($_POST["search"]["value"]))  
-         {  
-              $this->db->like("ti.prioridad", $_POST["search"]["value"]);  
-              $this->db->or_like("ti.codigo", $_POST["search"]["value"]);  
 
-         }  
          if(isset($_POST["order"]))  
          {  
               $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);  
          }  
          else  
          {  
-              $this->db->order_by('ti.idticket', 'DESC');  
+              $this->db->order_by('p.id', 'DESC');  
          }  
     }  
-    function selectdatatable($idempresa){  
-         $this->selectquery($idempresa);  
+    function selectdatatable(){  
+         $this->selectquery();  
          if($_POST["length"] != -1){  
           $this->db->limit($_POST['length'], $_POST['start']);  
          } 
-        $this->db->where('ti.estado <=','3');
-        $this->db->where('ti.idempresa',$idempresa);
+        //$this->db->where('ti.estado <=','3');
+        //$this->db->where('ti.idempresa',);
          $query = $this->db->get();  
          return $query->result();  
     }  
-    function get_filtered_data($idempresa){  
-         $this->selectquery($idempresa); 
-         $this->db->where('ti.estado <=','3');
-         $this->db->where('ti.idempresa',$idempresa); 
+    function get_filtered_data(){  
+         $this->selectquery(); 
+         //$this->db->where('ti.estado <=','3');
+         //$this->db->where('ti.idempresa',); 
          $query = $this->db->get();  
          return $query->num_rows();  
     }       
-    function get_all_data($idempresa) {  
-        $this->db->select('ti.*,sol.codigo codsolicitante ,CONCAT(sol.nombre," ",sol.apellido) solicitante , tps.codigo codsoporte,tps.nombre soporte,res.codigo codresponsable,CONCAT(res.nombre," ",res.apellido )responsable ');   
-        $this->db->from('ticket ti');  
-
-        $this->db->join('usuario sol','ti.idsolicitante=sol.idusuario'); 
-        $this->db->join('tiposop tps','ti.idtiposop = tps.idtiposop'); 
-        $this->db->join('usuario res','ti.idresponsable = res.idusuario','left'); 
-
+    function get_all_data() {  
+      $query='p.*,
+      e.code as codigo_empleado,e.name as empleado, 
+      c.name categoria,
+      mar.name marca,
+      mo.name modelo,
+      pro.name proveedor,
+      hard.OSNAME,hard.PROCESSORT,hard.MEMORY,hard.NAME as host_name,
+      stasig.name as estado1,
+      sthard.name as estado2,
+      bi.SSN as serial, bi.SMANUFACTURER,bi.SMODEL,bi.TYPE';
+      $this->db->select($query);   
+      $this->db->from('z_products p');  
+      $this->db->join('z_employees e','p.employee_id = e.id'); 
+      $this->db->join('z_categories c','p.category_id = c.id'); 
+      $this->db->join('z_brands mar','p.brand_id = mar.id'); 
+      $this->db->join('z_models mo','p.model_id = mo.id'); 
+      $this->db->join('hardware hard','p.hardware_id = hard.ID'); 
+      $this->db->join('z_providers pro','p.provider_id = pro.id'); 
+      $this->db->join('z_status_assignments stasig','p.status_assignment_id = stasig.id'); 
+      $this->db->join('z_status_hardwares sthard','p.status_hardware_id = sthard.id'); 
+      $this->db->join('bios bi','hard.ID = bi.HARDWARE_ID'); 
          
-        $this->db->where('ti.estado <=','3');
-        $this->db->where('ti.idempresa',$idempresa);
      return $this->db->count_all_results();  
     } 
 }

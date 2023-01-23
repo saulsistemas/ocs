@@ -18,7 +18,6 @@ class Cproduct extends CI_Controller {
         $_SESSION['menus']='producto';
         $data = array(
             'permisos' => $this->permisos,//NUEVO PARA CONTROL
-			'products' => $this->Mproduct->get_products(), 
 		);
 		$this->load->view('layouts/header');
 		$this->load->view('layouts/aside');
@@ -26,6 +25,50 @@ class Cproduct extends CI_Controller {
 		$this->load->view('layouts/footer');
 		
 	}
+
+    function fetch_user(){  
+           
+        $fetch_data = $this->Mproduct->selectdatatable();  
+        $data = array();  
+        foreach($fetch_data as $row)  
+        {  
+             $sub_array = array(); 
+             $sub_array[] = $row->id;   
+             $sub_array[] = $row->codigo_empleado;
+             $sub_array[] = $row->empleado;  
+             $sub_array[] = $row->categoria;  
+             $sub_array[] = $row->marca; 
+             $sub_array[] = $row->modelo; 
+             $sub_array[] = $row->serial; 
+             $sub_array[] = $row->OSNAME; 
+             $sub_array[] = $row->PROCESSORT; 
+             $sub_array[] = $row->MEMORY; 
+             $sub_array[] = $row->host_name; 
+             $sub_array[] = $row->proveedor; 
+             $sub_array[] = $row->estado1; 
+             $sub_array[] = $row->estado2; 
+                $info='<button type="button" class="btn btn-info btn-view-ticket btn-flat" data-toggle="modal" data-target="#modal-default" value="'.$row->id.'">
+                            <span class="fa fa-print"></span>                                       
+                        </button>'  ;          
+                if ($this->permisos->pupdate == 1) {
+                    $update= '<td><a href="'.base_url().'maintenance/Cproduct/edit/'.$row->id.'"" class="btn btn-warning btn-flat">  <span class="fa fa-pencil"></span></a>';
+                }else{$update='';}
+                if ($this->permisos->pdelete == 1) {
+                    $delete = '<a href="'.base_url().'maintenance/Cproduct/destroy/'.$row->id.'"" class="btn btn-danger btn-remove btn-flat">  <span class="fa fa-remove"></span></a></td>';  
+                }else{$delete='';}
+
+            $sub_array[]=$info.$update.$delete;
+            $data[] = $sub_array;  
+        }  
+        $output = array(  
+             "draw"            =>     intval($_POST["draw"]),  
+             "recordsTotal"    =>     $this->Mproduct->get_all_data(),  
+             "recordsFiltered" =>     $this->Mproduct->get_filtered_data(),  
+             "data"            =>     $data  
+        );  
+
+        echo json_encode($output);  
+   }
 
     public function create()
     {
